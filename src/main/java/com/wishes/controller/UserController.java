@@ -24,6 +24,12 @@ public class UserController {
         model.addAttribute("users", users);
         return "index";
     }
+    @RequestMapping("/list")
+    public String list(Model model) {
+        List<User> users = (List<User>) userService.findAllUsers();
+        model.addAttribute("users", users);
+        return "list";
+    }
      @RequestMapping("/user-{id}")
     public String index(@PathVariable("id") int id, Model model) {
         User user=userService.findById(id);

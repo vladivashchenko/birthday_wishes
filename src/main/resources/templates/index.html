@@ -4,24 +4,16 @@
     <title>Birthday wishing page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-	<link type="text/css" rel="stylesheet" href="css/custom.css" th:href="@{css/custom.css}" />
-</head>
+	<link type="text/css" rel="stylesheet" media="screen" href="static/css/custom.css" th:href="@{css/custom.css}"/>
+	</head>
+	<ul>
+	<li><a href="">Home</a></li>
+	<li><a href="news.asp">News</a></li>
+	<li><a href="contact.asp">Contact</a></li>
+	<li class="rightli active" style="float:right"><a href="/registration">Sign up</a></li>
+	</ul>
 	<body>
-		<h1>Users</h1>
-    	<table class="table table-bordered">
-			<tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th colspan="3" >Operations</th>
-			</tr>
-    		<tr th:each = "user:${users}">
-				<td th:text="${user.name}"></td>
-				<td th:text="${user.email}"></td>
-				<td><a th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a></td>
-				<td><a th:href="@{/update-user-{id}(id=${user.id})}" class="btn btn-primary">Update</a></td>
-				<td><a th:href="@{/user-{id}(id=${user.id})}" class="btn btn-info">Show</a></td>
-			</tr>
-    	</table>
-    <a href="/registration" class="btn btn-success">New User? Add account</a>
+
+
 	</body>
 </html>
