@@ -22,38 +22,38 @@ public class UserController {
     public String index(Model model) {
         List<User> users = (List<User>) userService.findAllUsers();
         model.addAttribute("users", users);
-        return "index";
+        return "user/index";
     }
     @RequestMapping("/list")
     public String list(Model model) {
         List<User> users = (List<User>) userService.findAllUsers();
         model.addAttribute("users", users);
-        return "list";
+        return "user/list";
     }
      @RequestMapping("/user-{id}")
     public String index(@PathVariable("id") int id, Model model) {
         User user=userService.findById(id);
         model.addAttribute("user", user);
-        return "show";
+        return "user/show";
     }
 
     @RequestMapping("/registration")
     public String addUser(Model model){
         model.addAttribute("user",new User());
-    return "registration";
+    return "user/registration";
     }
     @RequestMapping(value = { "/update-user-{id}" }, method = RequestMethod.GET)
     public String editUser(@PathVariable("id") int id, Model model) {
         User user = userService.findById(id);
         model.addAttribute("user", user);
         model.addAttribute("edit", true);
-        return "update";
+        return "user/update";
     }
     @RequestMapping(value = { "/update-user-{id}" }, method = RequestMethod.POST)
     public String updateUser(@Valid User user, Model model, @PathVariable("id")  int id) {
         userService.updateUser(user);
         model.addAttribute("success", "User " + user.getName() + " "+ user.getEmail() + " updated successfully");
-        return "registrationsuccess";
+        return "user/registrationsuccess";
     }
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String save(User user){

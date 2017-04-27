@@ -29,6 +29,17 @@ li a:hover {
     background-color: #34a1af;
 }
 body{
-    background: url("../images/birthday.jpg") no-repeat;
-    background-size: 120%;
+    background: url("../images/birthday2.jpg") no-repeat;
+    background-size: 100%;
+}
+.reg{
+    text-align:center;
+    margin-top: 700px;
+}
+.reg-button{
+    width: 400px;
+    height:60px;
+    font-size: 24pt;
+    font-style:italic;
+    font-family: Helvetica;
 }
