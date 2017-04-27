@@ -1,20 +1,17 @@
 package com.wishes.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
 @Table(name = "users")
 public class User {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+
+  private List<Wish> wishes;
   private int id;
-  
   @NotNull
   private String email;
   
@@ -32,7 +29,8 @@ public class User {
     this.email = email;
     this.name = name;
   }
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   public int getId() {
     return id;
   }
@@ -56,5 +54,13 @@ public class User {
   public void setName(String value) {
     this.name = value;
   }
-  
-} // class User
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  public List<Wish> getWishes() {
+    return wishes;
+  }
+
+  public void setWishes(List<Wish> wishes) {
+    this.wishes = wishes;
+  }
+}
