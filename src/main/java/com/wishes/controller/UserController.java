@@ -59,7 +59,7 @@ public class UserController {
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String save(User user){
         userService.saveUser(user);
-        return "redirect:/";
+        return "wishes/index";
     }
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable("id") int userId, Model model) {
