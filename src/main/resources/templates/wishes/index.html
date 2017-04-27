@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Birthday wishing page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="css/wishes.css" th:href="@{css/wishes.css}" />
+</head>
+	<body>
+		<h1>Wishes</h1>
+		<table class="table table-fit">
+			<thead class="">
+			<tr>
+				<th>Wish</th>
+				<th>Priority</th>
+				<th>Operation</th>
+			</tr>
+			</thead>
+			<tr th:each = "wish:${wishes}">
+				<td th:text="${wish.wishes}"></td>
+				<td th:text="${wish.priority}"></td>
+				<td><a th:href="@{/deletewish-{id}(id=${wish.id})}" class="btn btn-danger">Delete</a>
+				<a th:href="@{/update-wish-{id}(id=${wish.id})}" class="btn btn-primary">Update</a>
+				<a th:href="@{/wish-{id}(id=${wish.id})}" class="btn btn-info">Show</a></td>
+			</tr>
+    	</table>
+    <a href="/addwish" class="btn btn-success">Add wish</a>
+	</body>
+</html>

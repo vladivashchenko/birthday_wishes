@@ -7,7 +7,6 @@
  
 </head>
 <body>
-	<h1 th:text="${user.name}"></h1>
 	<div>
 		<table class="table table-striped">
 			<tr>
@@ -15,11 +14,10 @@
 				<th>Email</th>
 			</tr>
 			<tr>
-				<td th:text="${user.name}"></td>
-				<td th:text="${user.email}"></td>
+				<td th:text="${wish.wishes}"></td>
+				<td th:text="${wish.priority}"></td>
 			</tr>
 		</table>
 	</div>
-	<a th:href="@{wishes-{user_id}(user_id=${user.id})}" class="btn btn-primary">Wishes</a>
 </body>
 </html>

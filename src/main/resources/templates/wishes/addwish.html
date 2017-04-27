@@ -4,16 +4,19 @@
     <title>Birthday wishing page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-
+	<link type="text/css" rel="stylesheet" href="css/wishes.css" th:href="@{css/wishes.css}" />
 </head>
 <body>
-	<h1>New User</h1>
+	<h1>New wish</h1>
 	<div>
-		<form th:object="${user}" th:action="@{save}" action="#" method="post">
+		<form th:object="${wish}" th:action="@{savewish}" action="#" method="post">
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" th:field="*{name}" class="form-control" placeholder="Name" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" th:field="*{email}" class="form-control"	placeholder="Email" />
+			<input type="text" th:field="*{wishes}" class="form-control"
+				placeholder="wish" />
+			<input type="text" th:field="*{priority}" class="form-control"
+				   placeholder="priority" />
+			<input type="text" th:field="*{user}" class="form-control"
+				   placeholder="priority" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" class="btn btn-success" value="Save"></input>
 		</form>
