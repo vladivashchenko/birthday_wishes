@@ -10,17 +10,19 @@ import javax.validation.constraints.NotNull;
 @Table(name="wishes")
 public class Wish {
     private User user;
-
     private int id;
 
     @NotNull
     private String wishes;
+    @NotNull
+    private int priority;
 
     public Wish() {
     }
 
-    public Wish(String wish) {
+    public Wish(String wish,int priority) {
         this.wishes = wish;
+        this.priority=priority;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,6 +41,15 @@ public class Wish {
     public void setWishes(String wishes) {
         this.wishes = wishes;
     }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
     @ManyToOne
     @JoinColumn(name = "users_id")
     public User getUser() {
