@@ -24,15 +24,16 @@ public class UserController {
         model.addAttribute("users", users);
         return "user/index";
     }
-    @RequestMapping("/list")
-    public String list(Model model) {
+    @RequestMapping("/users")
+    public String users(Model model) {
         List<User> users = (List<User>) userService.findAllUsers();
         model.addAttribute("users", users);
-        return "user/list";
+        return "user/users";
     }
      @RequestMapping("/user-{id}")
     public String index(@PathVariable("id") int id, Model model) {
-        User user=userService.findById(id);
+        User entity=userService.findById(id);
+        User user = userService.findByEmail(entity.getEmail());
         model.addAttribute("user", user);
         return "user/show";
     }
@@ -64,5 +65,11 @@ public class UserController {
     public String deleteUser(@PathVariable("id") int userId, Model model) {
         userService.deleteUserById(userId);
         return "redirect:/";
+    }
+    @RequestMapping(value = "/user")
+    public String findUserByEmail(User user,Model model){
+        user = userService.findByEmail("vladviva@gmail.com");
+        model.addAttribute("user", user);
+            return "user/showEmail";
     }
 }
