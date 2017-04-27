@@ -53,7 +53,7 @@ public class UserController {
     public String updateUser(@Valid User user, Model model, @PathVariable("id")  int id) {
         userService.updateUser(user);
         model.addAttribute("success", "User " + user.getName() + " "+ user.getEmail() + " updated successfully");
-        return "user/registrationsuccess";
+        return "user/success";
     }
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String save(User user){
