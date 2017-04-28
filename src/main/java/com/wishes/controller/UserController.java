@@ -5,9 +5,8 @@ import com.wishes.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -20,8 +19,7 @@ public class UserController {
     private UserService userService;
     @RequestMapping("/")
     public String index(Model model) {
-        List<User> users = (List<User>) userService.findAllUsers();
-        model.addAttribute("users", users);
+
         return "user/index";
     }
     @RequestMapping("/users")
@@ -30,10 +28,9 @@ public class UserController {
         model.addAttribute("users", users);
         return "user/users";
     }
-     @RequestMapping("/user-{id}")
-    public String index(@PathVariable("id") int id, Model model) {
-        User entity=userService.findById(id);
-        User user = userService.findByEmail(entity.getEmail());
+    @RequestMapping("/user-{id}")
+    public String show(@PathVariable("id") int id, Model model) {
+        User user=userService.findById(id);
         model.addAttribute("user", user);
         return "user/show";
     }
@@ -56,20 +53,24 @@ public class UserController {
         model.addAttribute("success", "User " + user.getName() + " "+ user.getEmail() + " updated successfully");
         return "user/success";
     }
-    @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(User user){
-        userService.saveUser(user);
-        return "wishes/index";
+    @RequestMapping(value = "save", method = RequestMethod.GET)
+    public String saveUser(){
+        return "redirect:/users";
     }
+
+    @RequestMapping(value = "save", method = RequestMethod.POST)
+    public String save(@Valid User user, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "/user/registration";
+        }
+        userService.saveUser(user);
+        return "redirect:/users";
+    }
+
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable("id") int userId, Model model) {
         userService.deleteUserById(userId);
-        return "redirect:/";
+        return "redirect:/users";
     }
-    @RequestMapping(value = "/user")
-    public String findUserByEmail(User user,Model model){
-        user = userService.findByEmail("vladviva@gmail.com");
-        model.addAttribute("user", user);
-            return "user/showEmail";
-    }
+
 }

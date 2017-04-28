@@ -2,6 +2,7 @@ package com.wishes.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 
@@ -13,9 +14,11 @@ public class User {
   private List<Wish> wishes;
   private int id;
   @NotNull
+  @Size(min=2, max=30)
   private String email;
   
   @NotNull
+  @Size(min=2, max=30)
   private String name;
 
   public User() { }

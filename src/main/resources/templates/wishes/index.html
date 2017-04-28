@@ -16,6 +16,7 @@
 				<th>Operation</th>
 			</tr>
 			</thead>
+
 			<tr th:each = "wish:${wishes}">
 				<td th:text="${wish.wishes}"></td>
 				<td th:text="${wish.priority}"></td>
@@ -24,6 +25,6 @@
 				<a th:href="@{/wish-{id}(id=${wish.id})}" class="btn btn-info">Show</a></td>
 			</tr>
     	</table>
-    <a href="/addwish" class="btn btn-success">Add wish</a>
+		<a href="/addwish" class="btn btn-success">Add wish</a>
 	</body>
 </html>
