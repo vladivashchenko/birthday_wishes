@@ -15,7 +15,7 @@
 				placeholder="wish" />
 			<input type="text" th:field="*{priority}" class="form-control"
 				   placeholder="priority" />
-			<input type="text" th:field="*{user}" class="form-control"
+			<input type="hidden" th:name="user" th:id="user" th:attr="value =${user_id}" class="form-control"
 				   placeholder="priority" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" class="btn btn-success" value="Save"></input>

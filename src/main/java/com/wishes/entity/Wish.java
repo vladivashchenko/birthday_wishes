@@ -20,9 +20,13 @@ public class Wish {
     public Wish() {
     }
 
-    public Wish(String wish,int priority) {
+    public Wish(String wish,int priority,User user) {
         this.wishes = wish;
         this.priority=priority;
+        this.user = user;
+    }
+    public Wish(User user) {
+       this.user = user;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

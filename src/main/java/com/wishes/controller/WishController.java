@@ -1,6 +1,8 @@
 package com.wishes.controller;
 
+import com.wishes.entity.User;
 import com.wishes.entity.Wish;
+import com.wishes.service.UserService;
 import com.wishes.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ import java.util.List;
 public class WishController {
     @Autowired
     private WishService wishService;
+    @Autowired
+    private UserService userService;
     @RequestMapping("/wishes")
     public String list(Model model) {
         List<Wish> wishes = (List<Wish>) wishService.findAllWishes();
@@ -29,6 +33,8 @@ public class WishController {
     @RequestMapping("/wishes-{user_id}")
     public String list(Model model,@PathVariable("user_id") int user_id) {
         List<Wish> wishes = (List<Wish>) wishService.findByUserId(user_id);
+        User user = userService.findById(user_id);
+        model.addAttribute("currentUser",user);
         model.addAttribute("wishes", wishes);
         return "wishes/userwishes";
     }
@@ -40,10 +46,13 @@ public class WishController {
         return "wishes/show";
     }
 
-    @RequestMapping("/addwish")
-    public String addWish(Model model){
+    @RequestMapping("/addwish-{user_id}")
+    public String addWish(Model model,@PathVariable("user_id") int user_id){
+        User user = userService.findById(user_id);
+        model.addAttribute("user",user);
         model.addAttribute("wish",new Wish());
-    return "wishes/addwish";
+        model.addAttribute("user_id",user_id);
+        return "wishes/addwish";
     }
     @RequestMapping(value = { "/update-wish-{id}" }, method = RequestMethod.GET)
     public String editWish(@PathVariable("id") int id, Model model) {

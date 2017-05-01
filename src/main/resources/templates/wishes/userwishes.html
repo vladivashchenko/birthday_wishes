@@ -21,6 +21,6 @@
         <td th:text="${wish.priority}"></td>
     </tr>
 </table>
-<a href="/addwish" class="btn btn-success">Add wish</a>
+<a th:href="@{/addwish-{user_id}(user_id=${currentUser.id})}" class="btn btn-info">Add wish</a>
 </body>
 </html>
