@@ -25,7 +25,7 @@ public class SearchController {
             model.addAttribute("email", email);
             model.addAttribute("user", user);
         }
-        return "user/search";
+        return "user/show";
     }
 
 
