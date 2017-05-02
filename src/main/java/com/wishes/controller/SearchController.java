@@ -27,6 +27,16 @@ public class SearchController {
         }
         return "user/show";
     }
+    @RequestMapping(value = "/find")
+    public String find(@RequestParam(value = "name") String name, Model model) {
+        if(name != null){
+            userService.findByName(name);
+            User user = userService.findByName(name);
+            model.addAttribute("name", name);
+            model.addAttribute("user", user);
+        }
+        return "user/showForFriend";
+    }
 
 
 }

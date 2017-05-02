@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintValidatorContext;
+
 @Service("userService")
 @Transactional
 public class UserService{
@@ -55,4 +57,7 @@ public class UserService{
     }
 
 
+    public User findByName(String name) {
+        return userRepository.findByName(name);
+    }
 }

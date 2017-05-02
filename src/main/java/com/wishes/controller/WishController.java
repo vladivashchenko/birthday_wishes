@@ -38,6 +38,14 @@ public class WishController {
         model.addAttribute("wishes", wishes);
         return "wishes/userwishes";
     }
+    @RequestMapping("/list-{user_id}")
+    public String listForFriends(Model model,@PathVariable("user_id") int user_id) {
+        List<Wish> wishes = (List<Wish>) wishService.findByUserId(user_id);
+        User user = userService.findById(user_id);
+        model.addAttribute("currentUser",user);
+        model.addAttribute("wishes", wishes);
+        return "wishes/wishes";
+    }
 
      @RequestMapping("/wish-{user_id}")
     public String index(@PathVariable("user_id") int id, Model model) {
@@ -59,18 +67,21 @@ public class WishController {
         Wish wish = wishService.findById(id);
         model.addAttribute("wish", wish);
         model.addAttribute("edit", true);
-        return "updatewish";
+        return "wishes/update";
     }
     @RequestMapping(value = { "/update-wish-{id}" }, method = RequestMethod.POST)
     public String updateWish(@Valid Wish wish, Model model, @PathVariable("id")  int id) {
         wishService.updateWish(wish);
         model.addAttribute("success", "Wish " + wish.getWishes() + " updated successfully");
-        return "success";
+        return "wishes/success";
     }
-    @RequestMapping(value = "savewish", method = RequestMethod.POST)
-    public String save(Wish wish){
+    @RequestMapping(value = "savewish-{user_id}", method = RequestMethod.POST)
+    public String save(@PathVariable("user_id") int user_id,Wish wish,Model model){
         wishService.saveWish(wish);
-        return "redirect:wishes";
+        User user= userService.findById(user_id);
+        model.addAttribute("user",user);
+        model.addAttribute("success", "Wish: " + wish.getWishes() + " created successfully");
+        return "wishes/success";
     }
     @RequestMapping(value = "/deletewish-{id}", method = RequestMethod.GET)
     public String deleteWish(@PathVariable("id") int wishId, Model model) {

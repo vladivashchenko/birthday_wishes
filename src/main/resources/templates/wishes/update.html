@@ -7,7 +7,6 @@
 	<link type="text/css" rel="stylesheet" href="static/css/custom.css" th:href="@{css/custom.css}"/>
 </head>
 	<body>
-
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -30,17 +29,18 @@
 			</ul>
 		</div>
 	</nav>
-	<div>
-			<table class="table table-striped">
-				<tr>
-					<th>Name</th>
-					<th>Email</th>
-				</tr>
-				<tr>
-					<td th:text="${wish.wishes}"></td>
-					<td th:text="${wish.priority}"></td>
-				</tr>
-			</table>
+		<h1>Update Wish</h1>
+		<div>
+			<form th:object="${wish}" th:action="@{/update-wish-{id}(id=${wish.id})}" action="#" method="post">
+				<div style="clear: both; display: block; height: 10px;"></div>
+				<input type="text" th:field="*{wishes}" class="form-control"
+					placeholder="Name" />
+				<div style="clear: both; display: block; height: 10px;"></div>
+				<input type="text" th:field="*{priority}" class="form-control"
+					placeholder="Email" />
+				<div style="clear: both; display: block; height: 10px;"></div>
+				<input type="submit" class="btn btn-success" value="Save"></input>
+			</form>
 		</div>
 		<div class="footer">
 			<div class="container text-center">

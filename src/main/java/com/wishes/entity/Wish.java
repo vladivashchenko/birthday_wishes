@@ -13,6 +13,7 @@ public class Wish {
     private int id;
 
     @NotNull
+    @Column(unique=true)
     private String wishes;
     @NotNull
     private int priority;

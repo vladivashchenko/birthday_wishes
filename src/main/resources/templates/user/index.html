@@ -4,34 +4,47 @@
     <title>Birthday wishing page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-	<link type="text/css" rel="stylesheet" media="screen" href="static/css/user.css" th:href="@{css/user.css}"/>
-	<link rel="icon" href="../../static/images/icon.png"/>
+	<link type="text/css" rel="stylesheet" href="static/css/custom.css" th:href="@{css/custom.css}"/>
+	<style>
+		body{
+			background: url("../images/birthday2.jpg") no-repeat;
+			background-size: 100%;
+		}
+	</style>
 	</head>
 	<body>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">WebSiteName</a>
+				<a class="navbar-brand" href="/">Birthday wishes</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="#">Home</a></li>
+				<li><a href="/">Home</a></li>
 				<li><a href="/about">About</a></li>
 				<li><a href="/contact">Contact</a></li>
 			</ul>
 
-			<form th:object="${user}" th:action="@{/search}" class="navbar-form navbar-left" action="#" method="">
-				<input type="text" name="email" class="form-control" placeholder="Login by email" />
-				<input type="submit" class="btn btn-success" value="Login"/>
+			<form th:object="${user}" th:action="@{/find}" class="navbar-form navbar-left" action="#" method="">
+				<input type="text" name="name" class="form-control" placeholder="Find user by name" />
+				<input type="submit" class="btn btn-success" value="Search"/>
 			</form>
 
 			<ul>
-				<li class="rightli active" style="float:right"><a href="/registration">Sign up</a></li>
+				<li class="rightli" style="float:right"><a href="/registration btn btn-info">Sign up</a></li>
+				<li class="rightli active" style="float:right"><a href="/login">Login</a></li>
 			</ul>
 		</div>
 	</nav>
 	<div class="reg">
 	<a href="/registration" class="reg-button btn btn-success">New User? Add account</a>
-	<a href="/login" class="reg-button btn btn-success">Login</a>
+	</div>
+	<div class="footer">
+		<div class="container text-center">
+			<a class="btn btn-social-icon btn-twitter"><span class="fa fa-2x fa-twitter"></span></a>
+			<a class="btn btn-social-icon btn-vk"><span class="fa fa-2x fa-vk"></span></a>
+			<a class="btn btn-social-icon btn-github"><span class="fa fa-2x fa-github"></span></a>
+		</div>
+
 	</div>
 	</body>
 </html>

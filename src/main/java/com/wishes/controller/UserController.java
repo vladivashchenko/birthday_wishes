@@ -2,6 +2,7 @@ package com.wishes.controller;
 
 import com.wishes.entity.User;
 import com.wishes.service.UserService;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +35,12 @@ public class UserController {
         model.addAttribute("user", user);
         return "user/show";
     }
+    @RequestMapping("/userprofile-{id}")
+    public String showForFriend(@PathVariable("id") int id, Model model) {
+        User user=userService.findById(id);
+        model.addAttribute("user", user);
+        return "user/showForFriend";
+    }
 
     @RequestMapping("/registration")
     public String addUser(Model model){
@@ -48,7 +55,7 @@ public class UserController {
         return "user/update";
     }
     @RequestMapping(value = { "/update-user-{id}" }, method = RequestMethod.POST)
-    public String updateUser(@Valid User user, Model model, @PathVariable("id")  int id) {
+    public String updateUser(User user, Model model, @PathVariable("id")  int id) {
         userService.updateUser(user);
         model.addAttribute("success", "User " + user.getName() + " "+ user.getEmail() + " updated successfully");
         return "user/success";
@@ -59,12 +66,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(@Valid User user, BindingResult bindingResult){
+    public String save(@Valid User user, BindingResult bindingResult,Model model){
         if (bindingResult.hasErrors()) {
             return "/user/registration";
         }
         userService.saveUser(user);
-        return "redirect:/users";
+        model.addAttribute("success", "User " + user.getName() + " "+ user.getEmail() + " created successfully");
+        return "user/success";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
@@ -72,5 +80,8 @@ public class UserController {
         userService.deleteUserById(userId);
         return "redirect:/users";
     }
-
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "user/login";
+    }
 }

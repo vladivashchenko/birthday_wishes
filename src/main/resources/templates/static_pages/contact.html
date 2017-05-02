@@ -4,10 +4,12 @@
     <title>Birthday wishing page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link type="text/css" rel="stylesheet" href="static/css/custom.css" th:href="@{css/custom.css}"/>
+    <link rel="icon" href="../../static/images/icon.png"/>
 </head>
     <body>
-    	<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/">Birthday wishes</a>
@@ -29,28 +31,20 @@
 			</ul>
 		</div>
 	</nav>
-    <h1>Wishes</h1>
-        <table class="table table-fit">
-            <thead class="">
-            <tr>
-                <th>Wish</th>
-                <th>Priority</th>
-
-            </tr>
-            </thead>
-            <tr th:each = "wish:${wishes}">
-                <td th:text="${wish.wishes}"></td>
-                <td th:text="${wish.priority}"></td>
-            </tr>
-        </table>
-        <a th:href="@{/addwish-{user_id}(user_id=${currentUser.id})}" class="btn btn-info">Add wish</a>
-        <div class="footer">
-            <div class="container text-center">
+        <div class="text">
+            <h1>Give me a message</h1>
+                <div class="contact">
+                    Forgive me if I don’t answer immediately. I often heads down working on something that I can’t wait to share.
+                    I'll answer real soon. In the meantime, peep my social wall to see what I'm up to.
+                </div>
+        </div>
+       <div class="footer">
+          <div class="container text-center">
                 <a class="btn btn-social-icon btn-twitter"><span class="fa fa-2x fa-twitter"></span></a>
                 <a class="btn btn-social-icon btn-vk"><span class="fa fa-2x fa-vk"></span></a>
                 <a class="btn btn-social-icon btn-github"><span class="fa fa-2x fa-github"></span></a>
-            </div>
+          </div>
 
-        </div>
+       </div>
     </body>
 </html>

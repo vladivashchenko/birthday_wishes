@@ -30,10 +30,6 @@ li a:hover {
     float: right;
     background-color: #34a1af;
 }
-body{
-    background: url("../images/birthday2.jpg") no-repeat;
-    background-size: 100%;
-}
 .reg{
     text-align:center;
     margin-top: 700px;
@@ -44,4 +40,40 @@ body{
     font-size: 24pt;
     font-style:italic;
     font-family: Helvetica;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+}
+nav{
+    background-image: url("static/images/birthday.jpg");
+}
+
+.text {
+    color: rgb(42, 0, 103);
+    position: absolute;
+    text-indent: 1.25cm;
+    left:5%;
+    right: 40%;
+    height: auto;
+}
+h1{
+    text-align: center;
+}
+.contact{
+    left: 50px;
+    right: 30px;
+    font-family: Adobe Caslon Pro Regular,adobe-caslon-pro,serif;
+    font-size: 24pt;
+    text-align: justify;
+}
+body{
+    background: url("../images/wish.jpg") no-repeat ;
+    background-size: 120%;
+}
+.table-fit{
+    width: 1px;
+    white-space: nowrap;
 }
