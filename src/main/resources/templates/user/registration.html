@@ -29,9 +29,10 @@
 			</ul>
 		</div>
 	</nav>
-		<h1>New User</h1>
-		<div>
-			<form th:object="${user}" th:action="@{save}" action="#" method="post">
+
+			<h1>New User</h1>
+		<div class="regform">
+			<form th:object="${user}" th:action="@{save}"  action="#" method="post">
 				<table>
 					<tr>
 						<td>Name:</td>
@@ -45,7 +46,6 @@
 					</tr>
 					<tr>
 						<td><input type="submit" class="btn btn-success" value="Save"/></td>
-						<td th:if="${#fields.org.hibernate.exception.ConstraintViolationException}">User is exists</td>
 					</tr>
 				</table>
 			</form>

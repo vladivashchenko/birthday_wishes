@@ -27,6 +27,10 @@ public class WishService {
         return wishRepository.findByUserId(id);
     }
 
+    public  Wish  findWishByUserId(int id) {
+        return wishRepository.findWishByUserId(id);
+    }
+
     public void saveWish(Wish wish) {
         wishRepository.save(wish);
     }

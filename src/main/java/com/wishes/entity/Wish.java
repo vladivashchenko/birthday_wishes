@@ -17,6 +17,8 @@ public class Wish {
     private String wishes;
     @NotNull
     private int priority;
+    @NotNull
+    private String link;
 
     public Wish() {
     }
@@ -66,4 +68,11 @@ public class Wish {
     }
 
 
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 }

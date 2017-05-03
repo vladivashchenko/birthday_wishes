@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface WishRepository extends JpaRepository<Wish,Integer> {
     List<Wish> findByUserId(int id);
+    Wish findWishByUserId(int id);
 }

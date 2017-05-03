@@ -2,8 +2,13 @@ package com.wishes.controller;
 
 import com.wishes.entity.User;
 import com.wishes.entity.Wish;
+import com.wishes.jsoup.JsoupParser;
 import com.wishes.service.UserService;
 import com.wishes.service.WishService;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,8 +39,14 @@ public class WishController {
     }
 
     @RequestMapping("/wishes-{user_id}")
-    public String list(Model model,@PathVariable("user_id") int user_id) {
-        List<Wish> wishes = (List<Wish>) wishService.findByUserId(user_id);
+    public String list(Model model,@PathVariable("user_id") int user_id) throws IOException {
+        List<Wish> wishes = wishService.findByUserId(user_id);
+        String link;
+        for(Wish wish:wishes){
+            String wishurl=wish.getLink();
+            link= JsoupParser.parsePageHeaderInfo(wishurl);
+            model.addAttribute("link",link);
+        }
         User user = userService.findById(user_id);
         model.addAttribute("currentUser",user);
         model.addAttribute("wishes", wishes);
@@ -55,7 +69,7 @@ public class WishController {
     }
 
     @RequestMapping("/addwish-{user_id}")
-    public String addWish(Model model,@PathVariable("user_id") int user_id){
+    public String addWish(Model model,Wish wish,@PathVariable("user_id") int user_id) {
         User user = userService.findById(user_id);
         model.addAttribute("user",user);
         model.addAttribute("wish",new Wish());
@@ -79,6 +93,7 @@ public class WishController {
     public String save(@PathVariable("user_id") int user_id,Wish wish,Model model){
         wishService.saveWish(wish);
         User user= userService.findById(user_id);
+
         model.addAttribute("user",user);
         model.addAttribute("success", "Wish: " + wish.getWishes() + " created successfully");
         return "wishes/success";

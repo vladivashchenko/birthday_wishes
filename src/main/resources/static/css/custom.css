@@ -1,3 +1,4 @@
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -76,4 +77,18 @@ body{
 .table-fit{
     width: 1px;
     white-space: nowrap;
+}
+input{
+    width: auto !important;
+}
+.regform{
+    position: relative;
+    left: 42%;
+}
+.logform{
+    position: relative;
+    left: 43%;
+}
+td{
+    padding: 5px; /* Поля вокруг текста */
 }
