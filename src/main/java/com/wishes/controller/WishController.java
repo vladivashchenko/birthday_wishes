@@ -41,13 +41,15 @@ public class WishController {
     @RequestMapping("/wishes-{user_id}")
     public String list(Model model,@PathVariable("user_id") int user_id) throws IOException {
         List<Wish> wishes = wishService.findByUserId(user_id);
-        String link;
-        for(Wish wish:wishes){
-            String wishurl=wish.getLink();
-            link= JsoupParser.parsePageHeaderInfo(wishurl);
-            model.addAttribute("link",link);
-        }
+        List<String> links= new ArrayList<>();
+        String link=null;
+        for (int i = 0; i <wishes.size() ; i++){
+            String wishurl= wishes.get(i).getLink();
+            link=JsoupParser.parsePageHeaderInfo(wishurl);
+            links.add(i, link);}
+
         User user = userService.findById(user_id);
+        model.addAttribute("links",links);
         model.addAttribute("currentUser",user);
         model.addAttribute("wishes", wishes);
         return "wishes/userwishes";

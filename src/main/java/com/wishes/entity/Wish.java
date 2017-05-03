@@ -2,6 +2,7 @@ package com.wishes.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by stazhor on 27.04.17.
@@ -18,6 +19,7 @@ public class Wish {
     @NotNull
     private int priority;
     @NotNull
+    @Size(min=2, max=255)
     private String link;
 
     public Wish() {

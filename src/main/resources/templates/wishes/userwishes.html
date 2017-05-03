@@ -39,14 +39,16 @@
 
             </tr>
             </thead>
-            <tr th:each = "wish:${wishes}">
+            <tr th:each = "wish,iter:${wishes}">
                 <td th:text="${wish.wishes}"></td>
                 <td th:text="${wish.priority}"></td>
-                <td><p th:utext="${link}"></p></td>
+                <td>
+                <span th:utext="${links[iter.index]}"></span>
+                </td>
                 <td><a th:href="@{/update-wish-{id}(id=${wish.id})}" class="btn btn-primary">Update</a></td>
             </tr>
         </table>
-        <a th:href="@{/addwish-{user_id}(user_id=${currentUser.id})}" class="btn btn-info">Add wish</a>
+    <a th:href="@{/addwish-{user_id}(user_id=${currentUser.id})}" class="btn btn-info">Add wish</a>
 
         <div class="footer">
             <div class="container text-center">

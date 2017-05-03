@@ -16,10 +16,7 @@ public class JsoupParser {
 
         StringBuilder sb = new StringBuilder();
         Connection con = Jsoup.connect(urlStr);
-
-
         Document doc = con.get();
-
         String text = null;
         Elements metaOgTitle = doc.select("meta[property=og:title]");
         if (metaOgTitle != null) {
