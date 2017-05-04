@@ -4,6 +4,7 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -17,13 +18,18 @@ public class JsoupParser {
         StringBuilder sb = new StringBuilder();
         Connection con = Jsoup.connect(urlStr);
         Document doc = con.get();
-        String text = null;
-        Elements metaOgTitle = doc.select("meta[property=og:title]");
+        String   text = null;
+        String title = getMetaTag(doc, "title");
+        if (title == null) {
+            title = getMetaTag(doc, "og:title");
+        }
+
+        /*Elements metaOgTitle = doc.select("meta[property=og:title]");
         if (metaOgTitle != null) {
             text = metaOgTitle.attr("content");
         } else {
             text = doc.title();
-        }
+        }*/
         String Url = null;
         Elements metaOgUrl = doc.select("meta[property=og:url]");
         if (metaOgUrl != null) {
@@ -34,8 +40,8 @@ public class JsoupParser {
             sb.append(Url);
             sb.append("'>");
         }
-        if (text != null) {
-            sb.append(text);
+        if (title != null) {
+            sb.append(title);
 
         }
         String imageUrl = null;
@@ -55,4 +61,18 @@ public class JsoupParser {
 
         return sb.toString();
     }
+   public static String getMetaTag(Document document, String attr) throws IOException {
+        Elements elements = document.select("meta[name=" + attr + "]");
+        for (Element element : elements) {
+            final String s = element.attr("content");
+            if (s != null) return s;
+        }
+        elements = document.select("meta[property=" + attr + "]");
+        for (Element element : elements) {
+            final String s = element.attr("content");
+            if (s != null) return s;
+        }
+        return null;
+    }
+
 }
