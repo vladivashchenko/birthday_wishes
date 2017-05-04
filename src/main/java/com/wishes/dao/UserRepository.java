@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
         User findByEmail(String email);
-
-    User findByName(String name);
+        List<User> findByName(String name);
+        List<User> findAllByEmail(String email);
 }
 

@@ -15,13 +15,15 @@ public class User {
 
   private List<Wish> wishes;
   private int id;
+
   @NotNull
-  @Size(min=2, max=30)
+  @Size(min=1,max=255)
   @Email
+  @Column(unique=true)
   private String email;
   
   @NotNull
-  @Size(min=2, max=30)
+  @Size(min=1,max=50)
   private String name;
 
   public User() { }

@@ -4,29 +4,28 @@
     <title>Birthday wishing page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link type="text/css" rel="stylesheet" href="static/css/custom.css" th:href="@{css/custom.css}"/>
+    <link rel="icon" href="../../static/images/icon.png"/>
 </head>
     <body>
    	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="/">Birthday wishes</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="/">Home</a></li>
-				<li><a href="/about">About</a></li>
-				<li><a href="/contact">Contact</a></li>
-			</ul>
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{user-{id}(id=${user.id})}">Birthday wishes</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{user-{id}(id=${user.id})}">Home</a></li>
+            </ul>
 
 			<form th:object="${user}" th:action="@{/find}" class="navbar-form navbar-left" action="#" method="">
 				<input type="text" name="name" class="form-control" placeholder="Find user by name" />
 				<input type="submit" class="btn btn-success" value="Search"/>
 			</form>
-
-			<ul>
-				<li class="rightli" style="float:right"><a href="/registration btn btn-info">Sign up</a></li>
-				<li class="rightli active" style="float:right"><a href="/login">Login</a></li>
-			</ul>
+            <ul class="nav navbar-right">
+                <li class=" btn-primary"><a th:href="@{/update-user-{id}(id=${user.id})}">Account</a></li>
+                <li class=" btn-info"><a href="/">Log out</a></li>
+            </ul>
 		</div>
 	</nav>
     <h1>Wishes</h1>
@@ -46,9 +45,10 @@
                 <span th:utext="${links[iter.index]}"></span>
                 </td>
                 <td><a th:href="@{/update-wish-{id}(id=${wish.id})}" class="btn btn-primary">Update</a></td>
+                <td><a th:href="@{/deletewish-{id}(id=${wish.id})}" class="btn btn-danger">Delete</a></td>
             </tr>
         </table>
-    <a th:href="@{/addwish-{user_id}(user_id=${currentUser.id})}" class="btn btn-info">Add wish</a>
+    <a th:href="@{/addwish-{user_id}(user_id=${user.id})}" class="btn btn-info">Add wish</a>
 
         <div class="footer">
             <div class="container text-center">

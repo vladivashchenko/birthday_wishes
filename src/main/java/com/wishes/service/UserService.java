@@ -56,8 +56,7 @@ public class UserService{
         return findByEmail(user.getEmail()) != null;
     }
 
+    public List<User> findByName(String name) { return userRepository.findByName(name); }
 
-    public User findByName(String name) {
-        return userRepository.findByName(name);
-    }
+    public  List<User> findAllByEmail(String email){ return userRepository.findAllByEmail(email);}
 }

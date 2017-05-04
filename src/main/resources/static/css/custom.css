@@ -1,4 +1,20 @@
-
+#logo {
+    float: left;
+    margin-right: 10px;
+    font-size: 1.7em;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    padding-top: 9px;
+    font-weight: bold;}
+#logo:hover {
+     color: white;
+     text-decoration: none;
+ }
+body{
+    background: url("../images/wish.jpg") no-repeat ;
+    background-size: 120%;
+}
 ul {
     list-style-type: none;
     margin: 0;
@@ -60,9 +76,6 @@ nav{
     right: 40%;
     height: auto;
 }
-h1{
-    text-align: center;
-}
 .contact{
     left: 50px;
     right: 30px;
@@ -70,20 +83,28 @@ h1{
     font-size: 24pt;
     text-align: justify;
 }
-body{
-    background: url("../images/wish.jpg") no-repeat ;
-    background-size: 120%;
-}
+
 .table-fit{
     width: 1px;
     white-space: nowrap;
 }
-input{
-    width: auto !important;
+.row input{
+    border: 1px solid #bbb;
+    width: 100%;
+    margin-bottom: 15px;
 }
-.regform{
-    position: relative;
-    left: 42%;
+
+input {
+    height: auto !important;
+}
+h1{
+    margin-bottom: 30px;
+    text-align: center;
+}
+.regform {
+    position: absolute;
+    right: 35%;
+    left: 35%;
 }
 .logform{
     position: relative;
@@ -92,3 +113,5 @@ input{
 td{
     padding: 5px; /* Поля вокруг текста */
 }
+.center {
+    text-align: center;}

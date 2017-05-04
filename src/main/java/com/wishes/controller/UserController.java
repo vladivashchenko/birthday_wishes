@@ -57,7 +57,7 @@ public class UserController {
     @RequestMapping(value = { "/update-user-{id}" }, method = RequestMethod.POST)
     public String updateUser(User user, Model model, @PathVariable("id")  int id) {
         userService.updateUser(user);
-        model.addAttribute("success", "User " + user.getName() + " "+ user.getEmail() + " updated successfully");
+        model.addAttribute("message", "User " + user.getName() + " "+ user.getEmail() + " updated successfully");
         return "user/success";
     }
     @RequestMapping(value = "save", method = RequestMethod.GET)
@@ -66,12 +66,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(@Valid User user, BindingResult bindingResult,Model model){
-        if (bindingResult.hasErrors()) {
+    public String save(@Valid User user, BindingResult bindingResult,Model model) {
+        List<User> users = userService.findAllByEmail(user.getEmail());
+        if (bindingResult.hasErrors()||users.size()>0) {
+            model.addAttribute("message", "User with email "+user.getEmail()+" already exists");
             return "/user/registration";
         }
-        userService.saveUser(user);
-        model.addAttribute("success", "User " + user.getName() + " "+ user.getEmail() + " created successfully");
+        if(user.getEmail().toString()==null){
+            model.addAttribute("message", "Please fill form");
+        }
+        if(users.size()==0){
+            userService.saveUser(user);
+            model.addAttribute("message", "User " + user.getName() + " "+ user.getEmail() + " created successfully");
+        }
         return "user/success";
     }
 
