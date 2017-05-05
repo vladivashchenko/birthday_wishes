@@ -18,47 +18,35 @@ public class JsoupParser {
         StringBuilder sb = new StringBuilder();
         Connection con = Jsoup.connect(urlStr);
         Document doc = con.get();
-        String   text = null;
+        String text = null;
         String title = getMetaTag(doc, "title");
         if (title == null) {
             title = getMetaTag(doc, "og:title");
         }
-
-        /*Elements metaOgTitle = doc.select("meta[property=og:title]");
-        if (metaOgTitle != null) {
-            text = metaOgTitle.attr("content");
-        } else {
-            text = doc.title();
-        }*/
         String Url = null;
         Elements metaOgUrl = doc.select("meta[property=og:url]");
         if (metaOgUrl != null) {
             Url = metaOgUrl.attr("content");
         }
-        if (Url != null) {
+        if (Url!="") {
             sb.append("<a href='");
             sb.append(Url);
             sb.append("'>");
         }
         if (title != null) {
             sb.append(title);
-
         }
         String imageUrl = null;
         Elements metaOgImage = doc.select("meta[property=og:image]");
         if (metaOgImage != null) {
             imageUrl = metaOgImage.attr("content");
         }
-
         if (imageUrl != null) {
             sb.append("<img src='");
             sb.append(imageUrl);
             sb.append("' align='left' hspace='12' vspace='12' width='150px'/>");
-            sb.append("</a>");
         }
-
-
-
+        sb.append("</a>");
         return sb.toString();
     }
    public static String getMetaTag(Document document, String attr) throws IOException {
