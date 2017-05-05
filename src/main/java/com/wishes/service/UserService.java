@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 // TODO remove unused import
 import javax.validation.ConstraintValidatorContext;
-//TODO this code is unreadable. Use white-spaces, tabs . . .
+//TODO this code is unreadable. Use white-spaces, tabs . . . I have corrected com.wishes.service.WishService
 @Service("userService")
 @Transactional
 public class UserService{
