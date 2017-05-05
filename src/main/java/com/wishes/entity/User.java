@@ -63,6 +63,7 @@ public class User {
     this.name = value;
   }
 
+  //TODO move to line 16
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   public List<Wish> getWishes() {
     return wishes;
