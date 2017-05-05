@@ -33,19 +33,15 @@
 		<h1>Update Wish</h1>
 		<div>
 			<form th:object="${wish}" th:action="@{/update-wish-{id}(id=${wish.id})}" action="#" method="post">
-				<div style="clear: both; display: block; height: 10px;"></div>
 				<input type="text" th:field="*{wishes}" class="form-control"
 					placeholder="Name" />
-				<div style="clear: both; display: block; height: 10px;"></div>
 				<input type="text" th:field="*{priority}" class="form-control"
 					placeholder="Email" />
-				<div style="clear: both; display: block; height: 10px;"></div>
 				<input type="text" th:field="*{link}" class="form-control"
 					   placeholder="link" />
 				<input type="hidden" th:name="user" th:id="user" th:attr="value =${user_id}" class="form-control"
 					   placeholder="user_id" />
 				<input type="submit" class="btn btn-success" value="Save"/>
-
 			</form>
 		</div>
 		<div class="footer">

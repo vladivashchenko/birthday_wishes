@@ -45,6 +45,7 @@
 				</table>
 			</div>
 			<a th:href="@{wishes-{user_id}(user_id=${user.id})}" class="btn btn-primary">Wishes</a>
+			<a th:href="@{delete/{user_id}(user_id=${user.id})}" class="btn btn-danger">Delete account</a>
 		</div>
 		<div class="footer">
 			<div class="container text-center">

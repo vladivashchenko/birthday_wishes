@@ -33,7 +33,6 @@
 		<h1>New wish</h1>
 		<div>
 			<form th:object="${wish}" th:action="@{savewish-{user_id}(user_id=${user.id})}" action="#" method="post">
-				<div style="clear: both; display: block; height: 10px;"></div>
 				<input type="text" th:field="*{wishes}" class="form-control"
 					placeholder="wish" />
 				<input type="text" th:field="*{priority}" class="form-control"
@@ -42,7 +41,6 @@
 					   placeholder="link for present"/>
 				<input type="hidden" th:name="user" th:id="user" th:attr="value =${user_id}" class="form-control"
 					   placeholder="user_id" />
-				<div style="clear: both; display: block; height: 10px;"></div>
 				<input type="submit" class="btn btn-success" value="Save"/>
 			</form>
 		</div>
