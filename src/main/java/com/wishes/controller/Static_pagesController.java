@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by VladIvashchenko on 02.05.2017.
  */
 @Controller
+// TODO rename class. Use camelCase (like StaticPagesController)
 public class Static_pagesController {
     @RequestMapping(value = "/about", method = RequestMethod.GET)
     public String about() {
