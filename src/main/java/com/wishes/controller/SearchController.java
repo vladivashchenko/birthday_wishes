@@ -17,7 +17,7 @@ import java.util.List;
 public class SearchController {
 
     @Autowired
-    UserService userService;
+    UserService userService; //TODO add access modifier
     @RequestMapping(value = "/search")
     public String Search(@RequestParam(value = "email") String email, Model model) {
         User user = userService.findByEmail(email);
