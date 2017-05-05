@@ -3,6 +3,7 @@ package com.wishes.service;
 /**
  * Created by stazhor on 26.04.17.
  */
+//TODO 'stazhor'. Who is it?
 import java.util.List;
 
 import com.wishes.dao.UserRepository;
@@ -10,9 +11,9 @@ import com.wishes.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+// TODO remove unused import
 import javax.validation.ConstraintValidatorContext;
-
+//TODO this code is unreadable. Use white-spaces, tabs . . .
 @Service("userService")
 @Transactional
 public class UserService{
