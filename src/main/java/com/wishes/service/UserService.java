@@ -1,3 +1,4 @@
+//TODO Why packages name 'service'? There are, at least two services (UserService, WishService). Rename to 'com.wishes.services'
 package com.wishes.service;
 
 /**
