@@ -16,22 +16,17 @@ import javax.validation.ConstraintValidatorContext;
 @Service("userService")
 @Transactional
 public class UserService{
-
     @Autowired
     private UserRepository userRepository;
-
     public User findById(int id) {
         return userRepository.findOne(id);
     }
-
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-
     public void saveUser(User user) {
         userRepository.save(user);
     }
-
     public void updateUser(User user){
         User entity = findById(user.getId());
         if(entity!=null){
@@ -39,24 +34,14 @@ public class UserService{
             entity.setEmail(user.getEmail());
         }
     }
-
     public void deleteUserById(int id){
         userRepository.delete(id);
     }
-
-    public void deleteAllUsers(){
-        userRepository.deleteAll();
-    }
-
     public List<User> findAllUsers(){
         return (List<User>) userRepository.findAll();
     }
-
-    public boolean isUserExist(User user) {
-        return findByEmail(user.getEmail()) != null;
+    public List<User> findByName(String name) {
+        return userRepository.findByName(name);
     }
-
-    public List<User> findByName(String name) { return userRepository.findByName(name); }
-
     public  List<User> findAllByEmail(String email){ return userRepository.findAllByEmail(email);}
 }

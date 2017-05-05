@@ -14,33 +14,33 @@ import java.io.IOException;
  */
 public class JsoupParser {
     public static String parsePageHeaderInfo(String urlStr) throws IOException {
-
         StringBuilder sb = new StringBuilder();
         Connection con = Jsoup.connect(urlStr);
         Document doc = con.get();
-        String text = null;
-        String title = getMetaTag(doc, "title");
-        if (title == null) {
-            title = getMetaTag(doc, "og:title");
-        }
-        String Url = null;
-        Elements metaOgUrl = doc.select("meta[property=og:url]");
-        if (metaOgUrl != null) {
-            Url = metaOgUrl.attr("content");
-        }
-        if (Url!="") {
+        /*Get meta og:url from link*/
+        /*if meta og:url exists*/
+        String Url = getMetaTag(doc, "og:url");
+        if (Url!=null) {
             sb.append("<a href='");
             sb.append(Url);
             sb.append("'>");
         }
+        /* else use initial url*/
+        else{
+            sb.append("<a href='");
+            sb.append(urlStr);
+            sb.append("'>");
+        }
+        /*Get meta og:title from link if meta og:title exists*/
+        String title = getMetaTag(doc, "og:title");
+        /*if not exist use meta title*/
+        if (title == null) {
+            title = getMetaTag(doc, "title");
+        }
         if (title != null) {
             sb.append(title);
         }
-        String imageUrl = null;
-        Elements metaOgImage = doc.select("meta[property=og:image]");
-        if (metaOgImage != null) {
-            imageUrl = metaOgImage.attr("content");
-        }
+        String imageUrl = getMetaTag(doc, "og:image");
         if (imageUrl != null) {
             sb.append("<img src='");
             sb.append(imageUrl);

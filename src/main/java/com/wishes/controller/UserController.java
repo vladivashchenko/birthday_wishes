@@ -20,9 +20,9 @@ public class UserController {
     private UserService userService;
     @RequestMapping("/")
     public String index(Model model) {
-
         return "user/index";
     }
+    /* Show all users. Using to check correct addition of the user*/
     @RequestMapping("/users")
     public String users(Model model) {
         List<User> users = (List<User>) userService.findAllUsers();
@@ -60,11 +60,6 @@ public class UserController {
         model.addAttribute("message", "User " + user.getName() + " "+ user.getEmail() + " updated successfully");
         return "user/success";
     }
-    @RequestMapping(value = "save", method = RequestMethod.GET)
-    public String saveUser(){
-        return "redirect:/users";
-    }
-
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String save(@Valid User user, BindingResult bindingResult,Model model) {
         List<User> users = userService.findAllByEmail(user.getEmail());
@@ -72,20 +67,16 @@ public class UserController {
             model.addAttribute("message", "User with email "+user.getEmail()+" already exists");
             return "/user/registration";
         }
-        if(user.getEmail().toString()==null){
-            model.addAttribute("message", "Please fill form");
-        }
         if(users.size()==0){
             userService.saveUser(user);
             model.addAttribute("message", "User " + user.getName() + " "+ user.getEmail() + " created successfully");
         }
         return "user/success";
     }
-
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable("id") int userId, Model model) {
         userService.deleteUserById(userId);
-        return "redirect:/users";
+        return "redirect:/";
     }
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {

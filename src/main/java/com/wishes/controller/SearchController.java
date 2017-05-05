@@ -38,6 +38,4 @@ public class SearchController {
         }
         return "user/showForFriend";
     }
-
-
 }
