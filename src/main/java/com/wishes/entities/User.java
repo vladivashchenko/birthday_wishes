@@ -11,11 +11,12 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  private List<Wish> wishes;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  private List<Wish> wishes;
 
   @NotNull
   @Size(min=1,max=255)

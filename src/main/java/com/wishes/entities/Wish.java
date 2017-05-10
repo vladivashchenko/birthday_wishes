@@ -10,14 +10,22 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="wishes")
 public class Wish {
-    private User user;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    private User user;
 
     @NotNull
     @Column(unique=true)
     private String wishes;
+
     @NotNull
     private int priority;
+
     @NotNull
     @Size(min=2, max=255)
     private String link;
@@ -33,8 +41,7 @@ public class Wish {
     public Wish(User user) {
        this.user = user;
     }
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     public int getId() {
         return id;
     }
@@ -59,8 +66,7 @@ public class Wish {
         this.priority = priority;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "users_id")
+
     public User getUser() {
         return user;
     }
