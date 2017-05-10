@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet author="vlad" id="addForeignKeyConstraint-example">
+        <addForeignKeyConstraint baseColumnNames="users_id"
+                                 baseTableName="wishes"
+                                 constraintName="fk_user_id"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="tag-1.2" author="vlad">
+        <tagDatabase tag="1.2" />
+    </changeSet>
+
+</databaseChangeLog>
