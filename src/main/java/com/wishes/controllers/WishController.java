@@ -20,8 +20,10 @@ import java.util.List;
 public class WishController {
     @Autowired
     private WishService wishService;
+
     @Autowired
     private UserService userService;
+
     @RequestMapping("/wishes-{user_id}")
     public String list(Model model,@PathVariable("user_id") int user_id) throws IOException {
         List<Wish> wishes = wishService.findWishesByUserId(user_id);
@@ -31,13 +33,17 @@ public class WishController {
         for (int i = 0; i <wishes.size() ; i++){
             String wishurl= wishes.get(i).getLink();
             link=JsoupParser.parsePageHeaderInfo(wishurl);
-            links.add(i, link);}
+            links.add(i, link);
+        }
         User user = userService.findById(user_id);
+
         model.addAttribute("links",links);
         model.addAttribute("user",user);
         model.addAttribute("wishes", wishes);
+
         return "wishes/userwishes";
     }
+
     @RequestMapping("/list-{user_id}")
     public String listForFriends(Model model,@PathVariable("user_id") int user_id) throws IOException {
         List<Wish> wishes = wishService.findWishesByUserId(user_id);
@@ -50,11 +56,14 @@ public class WishController {
             links.add(i, link);}
 
         User user = userService.findById(user_id);
+
         model.addAttribute("links",links);
         model.addAttribute("user",user);
         model.addAttribute("wishes", wishes);
+
         return "wishes/wishes";
     }
+
     @RequestMapping("/addwish-{user_id}")
     public String addWish(Model model,Wish wish,@PathVariable("user_id") int user_id) {
         User user = userService.findById(user_id);
@@ -63,6 +72,7 @@ public class WishController {
         model.addAttribute("user_id",user_id);
         return "wishes/addwish";
     }
+
     @RequestMapping(value = { "/update-wish-{id}" }, method = RequestMethod.GET)
     public String editWish(@PathVariable("id") int id, Model model) {
         Wish wish = wishService.findById(id);
@@ -71,31 +81,40 @@ public class WishController {
         model.addAttribute("user", user);
         return "wishes/update";
     }
+
     @RequestMapping(value = { "/update-wish-{id}" }, method = RequestMethod.POST)
     public String updateWish(Wish wish, Model model, @PathVariable("id")  int id) {
         wishService.updateWish(wish);
         wish = wishService.findById(id);
         User user=wish.getUser();
+
         model.addAttribute("wish", wish);
         model.addAttribute("user", user);
         model.addAttribute("success", "Wish " + wish.getWishes() + " updated successfully");
+
         return "wishes/success";
     }
+
     @RequestMapping(value = "savewish-{user_id}", method = RequestMethod.POST)
     public String save(@PathVariable("user_id") int user_id,Wish wish,Model model){
+
         wishService.saveWish(wish);
         User user= userService.findById(user_id);
+
         model.addAttribute("user",user);
         model.addAttribute("success", "Wish: " + wish.getWishes() + " created successfully");
+
         return "wishes/success";
     }
     @RequestMapping(value = "/deletewish-{id}", method = RequestMethod.GET)
     public String deleteWish(@PathVariable("id") int wishId, Model model) {
-       Wish wish = wishService.findById(wishId);
-       User user= wish.getUser();
-       model.addAttribute("user", user);
-       model.addAttribute("success","Wish was deleted successfully" );
+
+        Wish wish = wishService.findById(wishId);
+        User user= wish.getUser();
         wishService.deleteWishById(wishId);
+        model.addAttribute("user", user);
+        model.addAttribute("success","Wish was deleted successfully" );
+
         return "wishes/success";
     }
     @RequestMapping(value = "deleteAll-{user_id}")
@@ -107,6 +126,7 @@ public class WishController {
         }
         wishService.deleteAllWishes(wishes);
         model.addAttribute("success","Wishes was deleted successfully" );
+
         return "wishes/success";
     }
 }

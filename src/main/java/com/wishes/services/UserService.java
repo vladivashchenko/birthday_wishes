@@ -1,51 +1,26 @@
 package com.wishes.services;
 
-import java.util.List;
-import com.wishes.dao.UserRepository;
 import com.wishes.entities.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service("userService")
-@Transactional
-public class UserService{
-    @Autowired
-    private UserRepository userRepository;
+import java.util.List;
 
-    public User findById(int id) {
-        return userRepository.findOne(id);
-    }
+/**
+ * Created by stazhor on 10.05.17.
+ */
+public interface UserService {
+    User findById(int id);
 
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+    User findByEmail(String email);
 
-    public void saveUser(User user) {
-        userRepository.save(user);
-    }
+    void saveUser(User user);
 
-    public void updateUser(User user){
-        User entity = findById(user.getId());
-        if(entity!=null){
-            entity.setName(user.getName());
-            entity.setEmail(user.getEmail());
-        }
-    }
+    void updateUser(User user);
 
-    public void deleteUserById(int id){
-        userRepository.delete(id);
-    }
+    void deleteUserById(int id);
 
-    public List<User> findAllUsers(){
-        return (List<User>) userRepository.findAll();
-    }
+    List<User> findAllUsers();
 
-    public List<User> findByName(String name) {
-        return userRepository.findByName(name);
-    }
+    List<User> findByName(String name);
 
-    public  List<User> findAllByEmail(String email){
-        return userRepository.findAllByEmail(email);
-    }
+    List<User> findAllByEmail(String email);
 }

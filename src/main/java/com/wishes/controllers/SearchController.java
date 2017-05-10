@@ -14,7 +14,8 @@ import java.util.List;
 public class SearchController {
 
     @Autowired
-    UserService userService; //TODO add access modifier
+    UserService userService;
+
     @RequestMapping(value = "/search")
     public String Search(@RequestParam(value = "email") String email, Model model) {
         User user = userService.findByEmail(email);
@@ -22,17 +23,22 @@ public class SearchController {
             model.addAttribute("message", "Incorrect email");
             return "user/login";
         }
-        else{
-        model.addAttribute("email", email);
-        model.addAttribute("user", user);}
+        else {
+            model.addAttribute("email", email);
+            model.addAttribute("user", user);
+        }
+
         return "user/show";
     }
+
     @RequestMapping(value = "/find")
     public String find(@RequestParam(value = "name") String name, Model model) {
         List<User> users = userService.findByName(name);
+
         if(users!=null){
             model.addAttribute("users", users);
         }
+
         return "user/showForFriend";
     }
 }

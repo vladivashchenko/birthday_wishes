@@ -9,6 +9,7 @@ public class StaticPagesController {
     public String about() {
         return "static_pages/about";
     }
+
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public String contact() {
         return "static_pages/contact";

@@ -1,6 +1,7 @@
 package com.wishes.entities;
 
 import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,6 +13,8 @@ public class User {
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Wish> wishes;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
 
   @NotNull
@@ -35,8 +38,7 @@ public class User {
     this.email = email;
     this.name = name;
   }
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+
   public int getId() {
     return id;
   }
