@@ -13,17 +13,4 @@ public class Application {
   public static void main(String[] args) {
     SpringApplication.run(Application.class, args);
   }
-
-  @Bean
-  public CommandLineRunner demo(UserRepository repository) {
-    //TODO There are many database migration management systems (e.g. liquibase). Would be better to implement it.
-    return (args) -> {
-        repository.save(new User(1,"John", "john@john.ru"));
-        repository.save(new User(2,"Steve", "steve@steve.com"));
-        repository.save(new User(3,"Mary", "mary@robinson.com"));
-        repository.save(new User(4,"Kate", "kate@kate.com"));
-        repository.save(new User(5,"Diana", "diana@doll.com"));
-    };
-  }
-
 }
