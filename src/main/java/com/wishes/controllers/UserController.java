@@ -1,8 +1,7 @@
-package com.wishes.controller;
+package com.wishes.controllers;
 
-import com.wishes.entity.User;
-import com.wishes.service.UserService;
-import org.hibernate.exception.ConstraintViolationException;
+import com.wishes.entities.User;
+import com.wishes.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-/**
- * Created by stazhor on 26.04.17.
- */
+
 @Controller
 public class UserController {
     @Autowired

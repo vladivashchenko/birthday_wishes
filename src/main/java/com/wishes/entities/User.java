@@ -1,19 +1,16 @@
-package com.wishes.entity;
+package com.wishes.entities;
 
 import org.hibernate.validator.constraints.Email;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
-//TODO remove unused import
-import java.util.Set;
-
 
 @Entity
 @Table(name = "users")
 public class User {
 
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Wish> wishes;
   private int id;
 
@@ -64,8 +61,6 @@ public class User {
     this.name = value;
   }
 
-  //TODO move to line 16
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   public List<Wish> getWishes() {
     return wishes;
   }

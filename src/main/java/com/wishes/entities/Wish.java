@@ -1,4 +1,4 @@
-package com.wishes.entity;
+package com.wishes.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

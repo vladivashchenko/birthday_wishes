@@ -1,11 +1,7 @@
-package com.wishes.service;
-
-/**
- * Created by stazhor on 26.04.17.
- */
+package com.wishes.services;
 
 import com.wishes.dao.WishRepository;
-import com.wishes.entity.Wish;
+import com.wishes.entities.Wish;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

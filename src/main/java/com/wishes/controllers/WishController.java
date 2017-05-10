@@ -1,14 +1,10 @@
-package com.wishes.controller;
+package com.wishes.controllers;
 
-import com.wishes.entity.User;
-import com.wishes.entity.Wish;
+import com.wishes.entities.User;
+import com.wishes.entities.Wish;
 import com.wishes.jsoup.JsoupParser;
-import com.wishes.service.UserService;
-import com.wishes.service.WishService;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import com.wishes.services.UserService;
+import com.wishes.services.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,15 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.validation.Valid;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by stazhor on 26.04.17.
- */
 @Controller
 public class WishController {
     @Autowired

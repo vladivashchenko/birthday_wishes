@@ -1,6 +1,5 @@
 package com.wishes.jsoup;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -9,9 +8,6 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
-/**
- * Created by stazhor on 03.05.17.
- */
 public class JsoupParser {
     public static String parsePageHeaderInfo(String urlStr) throws IOException {
         StringBuilder sb = new StringBuilder();

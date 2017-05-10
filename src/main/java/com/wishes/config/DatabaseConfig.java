@@ -6,9 +6,6 @@ import org.springframework.context.annotation.Bean;
 
 import javax.sql.DataSource;
 
-/**
- * Created by stazhor on 26.04.17.
- */
 public class DatabaseConfig {
     @Bean
     @ConfigurationProperties("spring.datasource")
