@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 import javax.sql.DataSource;
 
-public class DatabaseConfig {
+public class AppConfig {
     @Bean
     @ConfigurationProperties("spring.datasource")
     public DataSource dataSource() {
