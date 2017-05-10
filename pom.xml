@@ -35,18 +35,21 @@
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
-    <!--TODO Divide commits. In this case, you added 'org.jsoup' dependency and corrected *.html files and expanded 'WishRepository' so on so forth-->
-    <dependency>
+        <dependency>
       <groupId>org.jsoup</groupId>
       <artifactId>jsoup</artifactId>
       <version>1.10.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>3.5.3</version>
     </dependency>
   </dependencies>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <start-class>com.wishes.Application</start-class>
-    <!--TODO Here commit message is 'Add ability to search user by email'. Would be better - 'updated java version'-->
     <java.version>1.8</java.version>
   </properties>
 
@@ -62,6 +65,16 @@
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
+        </configuration>
+      </plugin>
+      <!-- User liquibase plugin -->
+      <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <version>3.4.2</version>
+        <configuration>
+          <propertyFile>liquibase/liquibase.properties</propertyFile>
+          <changeLogFile>liquibase/db-changelog-master.xml</changeLogFile>
         </configuration>
       </plugin>
     </plugins>
