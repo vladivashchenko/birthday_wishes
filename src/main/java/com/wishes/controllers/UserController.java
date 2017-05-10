@@ -24,42 +24,54 @@ public class UserController {
     @RequestMapping("/users")
     public String users(Model model) {
         List<User> users = (List<User>) userService.findAllUsers();
+
         model.addAttribute("users", users);
+
         return "user/users";
     }
 
     @RequestMapping("/user-{id}")
     public String show(@PathVariable("id") int id, Model model) {
         User user= userService.findById(id);
+
         model.addAttribute("user", user);
+
         return "user/show";
     }
 
     @RequestMapping("/userprofile-{id}")
     public String showForFriend(@PathVariable("id") int id, Model model) {
         User user= userService.findById(id);
+
         model.addAttribute("user", user);
+
         return "user/showForFriend";
     }
 
     @RequestMapping("/registration")
     public String addUser(Model model){
+
         model.addAttribute("user",new User());
-    return "user/registration";
+
+        return "user/registration";
     }
 
     @RequestMapping(value = { "/update-user-{id}" }, method = RequestMethod.GET)
     public String editUser(@PathVariable("id") int id, Model model) {
         User user = userService.findById(id);
+
         model.addAttribute("user", user);
         model.addAttribute("edit", true);
+
         return "user/update";
     }
 
     @RequestMapping(value = { "/update-user-{id}" }, method = RequestMethod.POST)
     public String updateUser(User user, Model model, @PathVariable("id")  int id) {
         userService.updateUser(user);
+
         model.addAttribute("message", "User " + user.getName() + " "+ user.getEmail() + " updated successfully");
+
         return "user/success";
     }
 
@@ -67,19 +79,21 @@ public class UserController {
     public String save(@Valid User user, BindingResult bindingResult,Model model) {
         List<User> users = userService.findAllByEmail(user.getEmail());
         if (bindingResult.hasErrors()||users.size()>0) {
-            model.addAttribute("message", "User with email "+user.getEmail()+" already exists");
+            model.addAttribute("message", "Incorrect "+user.getEmail()+" email or username");
             return "/user/registration";
         }
         if(users.size()==0){
             userService.saveUser(user);
             model.addAttribute("message", "User " + user.getName() + " "+ user.getEmail() + " created successfully");
         }
+
         return "user/success";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable("id") int userId, Model model) {
         userService.deleteUserById(userId);
+
         return "redirect:/";
     }
 

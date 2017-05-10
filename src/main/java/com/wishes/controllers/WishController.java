@@ -8,13 +8,17 @@ import com.wishes.services.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 public class WishController {
@@ -29,11 +33,21 @@ public class WishController {
         List<Wish> wishes = wishService.findWishesByUserId(user_id);
         List<String> links= new ArrayList<>();
         String link=null;
+        final String URL_REGEX = "^((https?|ftp)://|(www|ftp)\\.)?[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?$";
         /*parse link*/
         for (int i = 0; i <wishes.size() ; i++){
             String wishurl= wishes.get(i).getLink();
-            link=JsoupParser.parsePageHeaderInfo(wishurl);
-            links.add(i, link);
+
+            Pattern p = Pattern.compile(URL_REGEX);
+            Matcher m = p.matcher(wishurl);
+
+            if(m.find()){
+                link=JsoupParser.parsePageHeaderInfo(wishurl);
+                links.add(i, link);
+            }
+            else{
+                links.add(i,wishurl);
+            }
         }
         User user = userService.findById(user_id);
 
@@ -65,11 +79,13 @@ public class WishController {
     }
 
     @RequestMapping("/addwish-{user_id}")
-    public String addWish(Model model,Wish wish,@PathVariable("user_id") int user_id) {
+    public String addWish(Model model, @PathVariable("user_id") int user_id) {
         User user = userService.findById(user_id);
+
         model.addAttribute("user",user);
         model.addAttribute("wish",new Wish());
         model.addAttribute("user_id",user_id);
+
         return "wishes/addwish";
     }
 
@@ -77,8 +93,10 @@ public class WishController {
     public String editWish(@PathVariable("id") int id, Model model) {
         Wish wish = wishService.findById(id);
         User user=wish.getUser();
+
         model.addAttribute("wish", wish);
         model.addAttribute("user", user);
+
         return "wishes/update";
     }
 
@@ -96,8 +114,10 @@ public class WishController {
     }
 
     @RequestMapping(value = "savewish-{user_id}", method = RequestMethod.POST)
-    public String save(@PathVariable("user_id") int user_id,Wish wish,Model model){
+    public String save(@PathVariable("user_id") int user_id, @Valid Wish wish, BindingResult bindingResult, Model model){
 
+        if(bindingResult.hasErrors())
+            return "redirect:addwish-"+user_id;
         wishService.saveWish(wish);
         User user= userService.findById(user_id);
 
@@ -112,6 +132,7 @@ public class WishController {
         Wish wish = wishService.findById(wishId);
         User user= wish.getUser();
         wishService.deleteWishById(wishId);
+
         model.addAttribute("user", user);
         model.addAttribute("success","Wish was deleted successfully" );
 
@@ -125,6 +146,7 @@ public class WishController {
             model.addAttribute("user",user);
         }
         wishService.deleteAllWishes(wishes);
+
         model.addAttribute("success","Wishes was deleted successfully" );
 
         return "wishes/success";
