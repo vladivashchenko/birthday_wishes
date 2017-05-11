@@ -31,14 +31,18 @@
 		</nav>
 	</header>
 		<h1>Update User</h1>
-		<div>
-			<form th:object="${user}" th:action="@{/update-user-{id}(id=${user.id})}" action="#" method="post">
-				<input type="text" th:field="*{name}" class="form-control"
-					placeholder="Name" />
-				<input type="text" th:field="*{email}" class="form-control"
-					placeholder="Email" />
-				<input type="submit" class="btn btn-success" value="Save"></input>
-			</form>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<form th:object="${user}" th:action="@{/update-user-{id}(id=${user.id})}" action="#" method="post">
+					<input type="text" th:field="*{name}" class="form-control"
+						placeholder="Name" />
+					<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger">Name Error</p>
+					<input type="text" th:field="*{email}" class="form-control"
+						placeholder="Email" />
+					<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger">Name Error</p>
+					<input type="submit" class="btn btn-success" value="Save"></input>
+				</form>
+			</div>
 		</div>
 		<div class="footer">
 			<div class="container text-center">
