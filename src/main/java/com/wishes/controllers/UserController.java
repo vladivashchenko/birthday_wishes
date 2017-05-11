@@ -74,11 +74,9 @@ public class UserController {
         {
             return "user/update";
         }
-        else{
+        else {
             userService.updateUser(user);
         }
-
-
         model.addAttribute("message", "User " + user.getName() + " "+ user.getEmail() + " updated successfully");
 
         return "user/success";
