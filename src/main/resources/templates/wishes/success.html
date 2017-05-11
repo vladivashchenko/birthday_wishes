@@ -31,9 +31,9 @@
 		</nav>
 	</header>
 		<div class="container text-center">
-			<p th:text="${success}" />
+			<p th:text="${success}" class="alert alert-success"/>
 			<div th:if="${user}">
-			Go to  <a th:href="@{/wishes-{user_id}(user_id=${user.id})}" class="btn btn-info">Show</a>
+				Go to  <a th:href="@{/wishes-{user_id}(user_id=${user.id})}" class="btn btn-info">Show</a>
 			</div>
 		</div>
 		<div class="footer">

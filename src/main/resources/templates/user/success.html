@@ -30,9 +30,11 @@
 			</div>
 		</nav>
 	</header>
-        <p th:text="${message}"/>
-		<div th:if="${user}">
-        Go to  <a th:href="@{/user-{id}(id=${user.id})}" class="btn btn-info">Show</a>
+		<div class="container text-center">
+			<p th:text="${message}" class="alert alert-success"/>
+			<div th:if="${user}">
+				Go to  <a th:href="@{/user-{id}(id=${user.id})}" class="btn btn-info">Show</a>
+			</div>
 		</div>
 		<div class="footer">
 			<div class="container text-center">
