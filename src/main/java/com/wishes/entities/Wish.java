@@ -1,12 +1,16 @@
 package com.wishes.entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- * Created by stazhor on 27.04.17.
- */
 @Entity
 @Table(name="wishes")
 public class Wish {
@@ -21,13 +25,14 @@ public class Wish {
 
     @NotNull
     @Column(unique=true)
+    @Size(min = 1, max = 255)
     private String wishes;
 
     @NotNull
     private int priority;
 
     @NotNull
-    @Size(min=2, max=255)
+    @Size(min=1, max=255)
     private String link;
 
     public Wish() {
@@ -66,7 +71,6 @@ public class Wish {
         this.priority = priority;
     }
 
-
     public User getUser() {
         return user;
     }
@@ -74,7 +78,6 @@ public class Wish {
     public void setUser(User user) {
         this.user = user;
     }
-
 
     public String getLink() {
         return link;
