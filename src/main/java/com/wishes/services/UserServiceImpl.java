@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
-        userRepository.save(user);
+       userRepository.save(user);
     }
 
     @Override
@@ -56,4 +56,15 @@ public class UserServiceImpl implements UserService {
     public  List<User> findAllByEmail(String email){
         return userRepository.findAllByEmail(email);
     }
+
+    @Override
+    public boolean isUserExists(User user) {
+        List<User> users = userRepository.findAllByEmail(user.getEmail());
+        if(users.size()>0)
+            return true;
+        else
+            return false;
+    }
+
+
 }

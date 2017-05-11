@@ -1,12 +1,9 @@
 package com.wishes.services;
 
 import com.wishes.entities.User;
-
 import java.util.List;
 
-/**
- * Created by stazhor on 10.05.17.
- */
+
 public interface UserService {
     User findById(int id);
 
@@ -23,4 +20,7 @@ public interface UserService {
     List<User> findByName(String name);
 
     List<User> findAllByEmail(String email);
+
+    public boolean isUserExists(User user);
+
 }

@@ -2,6 +2,7 @@ package com.wishes.controllers;
 
 import com.wishes.entities.User;
 import com.wishes.services.UserService;
+import com.wishes.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +24,8 @@ public class UserController {
     /* Show all users. Using to check correct addition of the user*/
     @RequestMapping("/users")
     public String users(Model model) {
-        List<User> users = (List<User>) userService.findAllUsers();
 
+        List<User> users = (List<User>) userService.findAllUsers();
         model.addAttribute("users", users);
 
         return "user/users";
@@ -32,8 +33,8 @@ public class UserController {
 
     @RequestMapping("/user-{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        User user= userService.findById(id);
 
+        User user= userService.findById(id);
         model.addAttribute("user", user);
 
         return "user/show";
@@ -41,8 +42,8 @@ public class UserController {
 
     @RequestMapping("/userprofile-{id}")
     public String showForFriend(@PathVariable("id") int id, Model model) {
-        User user= userService.findById(id);
 
+        User user= userService.findById(id);
         model.addAttribute("user", user);
 
         return "user/showForFriend";
@@ -58,8 +59,8 @@ public class UserController {
 
     @RequestMapping(value = { "/update-user-{id}" }, method = RequestMethod.GET)
     public String editUser(@PathVariable("id") int id, Model model) {
-        User user = userService.findById(id);
 
+        User user = userService.findById(id);
         model.addAttribute("user", user);
         model.addAttribute("edit", true);
 
@@ -67,8 +68,16 @@ public class UserController {
     }
 
     @RequestMapping(value = { "/update-user-{id}" }, method = RequestMethod.POST)
-    public String updateUser(User user, Model model, @PathVariable("id")  int id) {
-        userService.updateUser(user);
+    public String updateUser(@Valid User user,BindingResult bindingResult, Model model, @PathVariable("id")  int id) {
+
+        if(bindingResult.hasErrors())
+        {
+            return "user/update";
+        }
+        else{
+            userService.updateUser(user);
+        }
+
 
         model.addAttribute("message", "User " + user.getName() + " "+ user.getEmail() + " updated successfully");
 
@@ -76,22 +85,21 @@ public class UserController {
     }
 
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String save(@Valid User user, BindingResult bindingResult,Model model) {
-        List<User> users = userService.findAllByEmail(user.getEmail());
-        if (bindingResult.hasErrors()||users.size()>0) {
-            model.addAttribute("message", "Incorrect "+user.getEmail()+" email or username");
-            return "/user/registration";
+    public String save(@Valid User user, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors() || !UserValidator.correct(user,userService)) {
+           model.addAttribute("message", UserValidator.Check(user,userService));
+           return "/user/registration";
         }
-        if(users.size()==0){
-            userService.saveUser(user);
-            model.addAttribute("message", "User " + user.getName() + " "+ user.getEmail() + " created successfully");
-        }
+        userService.saveUser(user);
+        model.addAttribute("message", UserValidator.success(user));
 
         return "user/success";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable("id") int userId, Model model) {
+
         userService.deleteUserById(userId);
 
         return "redirect:/";
