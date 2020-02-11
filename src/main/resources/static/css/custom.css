@@ -1,4 +1,4 @@
-#logo {
+﻿#logo {
     float: left;
     margin-right: 10px;
     font-size: 1.7em;
@@ -49,7 +49,7 @@ li a:hover {
 }
 .reg{
     text-align:center;
-    margin-top: 700px;
+    margin-top: 600px;
 }
 .reg-button{
     width: 400px;
